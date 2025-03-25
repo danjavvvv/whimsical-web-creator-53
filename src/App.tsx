@@ -1,27 +1,36 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from '@/contexts/AuthContext';
+import Index from '@/pages/Index';
+import Auth from '@/pages/Auth';
+import SupplierDashboard from '@/pages/SupplierDashboard';
+import NewSubmission from '@/pages/NewSubmission';
+import SubmissionResults from '@/pages/SubmissionResults';
+import AdminDashboard from '@/pages/AdminDashboard';
+import AdminBaselineConfig from '@/pages/AdminBaselineConfig';
+import NotFound from '@/pages/NotFound';
+import { Toaster } from 'sonner';
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+function App() {
+  return (
+    <Router>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
+          <Route path="/new-submission" element={<NewSubmission />} />
+          <Route path="/submission-results" element={<SubmissionResults />} />
+          <Route path="/submission-results/:submissionId" element={<SubmissionResults />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/admin-baseline-config" element={<AdminBaselineConfig />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+        <Toaster />
+      </AuthProvider>
+    </Router>
+  );
+}
 
 export default App;

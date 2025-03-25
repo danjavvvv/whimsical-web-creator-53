@@ -8,83 +8,72 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 240 10% 3.9%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 240 10% 3.9%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.75rem;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --primary: 240 6% 10%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+    
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+    
+    --accent: 240 5% 96%;
+    --accent-foreground: 240 6% 10%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 240 10% 3.9%;
+    
+    --radius: 0.5rem;
   }
 
   * {
     @apply border-border;
   }
-
+  
   html {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
   }
-
+  
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 }
 
-@layer components {
-  .container-custom {
-    @apply w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8;
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-lg bg-white/70 border border-white/20;
   }
   
-  .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors 
-    focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring 
-    bg-primary text-primary-foreground shadow hover:bg-primary/90 px-6 py-3;
+  .text-balance {
+    text-wrap: balance;
   }
-  
-  .btn-outline {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors 
-    focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring 
-    border border-input bg-transparent hover:bg-accent hover:text-accent-foreground px-6 py-3;
-  }
-  
-  .glass-card {
-    @apply bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-white/20;
-  }
-  
-  .section-padding {
-    @apply py-24 md:py-32;
-  }
-  
-  .heading-xl {
-    @apply font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight;
-  }
-  
-  .heading-lg {
-    @apply font-display text-3xl sm:text-4xl font-bold tracking-tight;
-  }
-  
-  .heading-md {
-    @apply font-display text-2xl sm:text-3xl font-bold;
-  }
+}
+
+/* Custom animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
 }
